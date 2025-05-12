@@ -1,6 +1,6 @@
 CREATE_TABLE_CLIENTE = """
 CREATE TABLE IF NOT EXISTS cliente (
-    id_cliente INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
     cpf TEXT NOT NULL UNIQUE,
     telefone TEXT NOT NULL UNIQUE,
@@ -14,20 +14,20 @@ VALUES (?, ?, ?, ?, ?);
 UPDATE_CLIENTE = """
 INSERT INTO cliente (nome, cpf, telefone, email, data_nascimento)
 VALUES (?, ?, ?, ?, ?)
-WHERE id_cliente = ?;
+WHERE id = ?;
 """
 DELETE_CLIENTE = """
 DELETE FROM cliente
-WHERE id_cliente = ?;
+WHERE id = ?;
 """
 GET_CLIENTE_BY_ID = """
 SELECT id, nome, cpf, telefone, email, data_nascimento
 FROM cliente
-WHERE id_cliente = ?;
+WHERE id = ?;
 """
 
-GET_CLIENTE_BY_PAGE = """
-SELECT id_cliente, nome, cpf, telefone, email, data_nascimento
+GET_CLIENTES_BY_PAGE = """
+SELECT id, nome, cpf, telefone, email, data_nascimento
 FROM cliente
 ORDER BY nome ASC
 LIMIT ? OFFSET ?;

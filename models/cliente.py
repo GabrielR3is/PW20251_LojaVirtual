@@ -10,4 +10,3 @@ class Cliente:
     telefone: str
     email: str
     data_nascimento: datetime
-
