@@ -26,3 +26,11 @@ FROM cliente
 WHERE id_cliente = ?;
 """
 
+GET_CLIENTE_BY_PAGE = """
+SELECT id_cliente, nome, cpf, telefone, email, data_nascimento
+FROM cliente
+ORDER BY nome ASC
+LIMIT ? OFFSET ?;
+"""
+
+
