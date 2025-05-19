@@ -4,11 +4,14 @@ from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from babel.numbers import format_currency
 
+from models import categoria
+from repo.categoria_repo import criar_tabela_categorias, obter_categorias_por_pagina
 from repo.cliente_repo import criar_tabela_clientes, obter_clientes_por_pagina
 from repo.produto_repo import criar_tabela_produtos, obter_produto_por_id, obter_produtos_por_pagina
 
 criar_tabela_produtos()
 criar_tabela_clientes()
+criar_tabela_categorias()
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -41,5 +44,12 @@ def read_clientes(request: Request):
     clientes = obter_clientes_por_pagina(12, 0)
     response = templates.TemplateResponse("clientes.html", {"request": request, "clientes": clientes})
     return response
+
+@app.get("/categorias")
+def read_categoria(request: Request):
+    categorias = obter_categorias_por_pagina(12, 0)
+    response = templates.TemplateResponse("categorias.html", {"request": request, "categorias": categorias})
+    return response
+
 if __name__ == "__main__":
     uvicorn.run(app=app, port=8000, reload=True)
