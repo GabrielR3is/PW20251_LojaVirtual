@@ -12,7 +12,6 @@
             <th>Data Nasc.</th>
         </tr>
     </thead>
-</table>
     <tbody>
         {% for cliente in clientes %}
         <tr>
@@ -21,10 +20,11 @@
             <td>{{ cliente.cpf }}</td>
             <td>{{ cliente.email }}</td>
             <td>{{ cliente.telefone }}</td>
-            <td>{{ cliente.data_nascimento.strftime('%d/%m/%Y') }}</td>
+            <td>{{ cliente.data_nascimento.strftime("%d/%m/%Y") }}</td>
         </tr>
         {% endfor %}
     </tbody>
+</table>
 {% endblock %}
 
 

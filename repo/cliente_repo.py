@@ -1,8 +1,9 @@
+from datetime import datetime
 from data.database import obter_conexao
 from sql.cliente_sql import *
 from models.cliente import Cliente
 
-def criar_tabela():
+def criar_tabela_clientes():
     """Cria a tabela Cliente se ela não existir."""
     conexao = obter_conexao()
     cursor = conexao.cursor()
@@ -54,7 +55,7 @@ def obter_cliente_por_id(id: int) -> Cliente:
             cpf=resultado[2],
             telefone=resultado[3],
             email=resultado[4],
-            data_nascimento=resultado[5]
+            data_nascimento=datetime.strptime(resultado[5], "%Y-%m-%d").date()
         )
     return None
 
@@ -71,5 +72,5 @@ def obter_clientes_por_pagina(limite: int, offset: int) -> list[Cliente]:
         cpf=resultado[2],
         telefone=resultado[3],
         email=resultado[4],
-        data_nascimento=resultado[5]
+        data_nascimento=datetime.strptime(resultado[5], "%Y-%m-%d").date()
     ) for resultado in resultados]
