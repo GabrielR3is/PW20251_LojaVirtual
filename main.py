@@ -30,6 +30,12 @@ def read_produtos(request: Request, id: int):
     response = templates.TemplateResponse("produto.html", {"request": request, "produto": produto})
     return response
 
+@app.get("/produtos")
+def read_produtos(request: Request):
+    produtos = obter_produtos_por_pagina(12, 0)
+    response = templates.TemplateResponse("produtos.html", {"request": request, "produtos": produtos})
+    return response
+
 @app.get("/clientes")
 def read_clientes(request: Request):
     clientes = obter_clientes_por_pagina(12, 0)
