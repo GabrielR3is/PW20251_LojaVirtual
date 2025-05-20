@@ -59,13 +59,3 @@ def obter_categorias_por_pagina(limite: int, pagina: int) -> list[Categoria]:
     conexao.close()
     return [Categoria(id=linha[0], nome=linha[1]) for linha in resultados]
 
-def obter_categoria_por_nome(nome: str) -> Categoria:
-    """Obtém uma categoria pelo nome."""
-    conexao = obter_conexao()
-    cursor = conexao.cursor()
-    cursor.execute("SELECT id, nome FROM categoria WHERE nome = ?", (nome,))
-    resultado = cursor.fetchone()
-    conexao.close()
-    if resultado:
-        return Categoria(id=resultado[0], nome=resultado[1])
-    return None
