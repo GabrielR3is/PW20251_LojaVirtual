@@ -7,11 +7,13 @@ from babel.numbers import format_currency
 from models import categoria
 from repo.categoria_repo import criar_tabela_categorias, obter_categorias_por_pagina
 from repo.cliente_repo import criar_tabela_clientes, obter_clientes_por_pagina
+from repo.endereco_repo import criar_tabela_enderecos, obter_enderecos_por_pagina
 from repo.produto_repo import criar_tabela_produtos, obter_produto_por_id, obter_produtos_por_pagina
 
 criar_tabela_produtos()
 criar_tabela_clientes()
 criar_tabela_categorias()
+criar_tabela_enderecos()
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -49,6 +51,12 @@ def read_clientes(request: Request):
 def read_categoria(request: Request):
     categorias = obter_categorias_por_pagina(12, 0)
     response = templates.TemplateResponse("categorias.html", {"request": request, "categorias": categorias})
+    return response
+
+@app.get("/enderecos")
+def read_endereco(request: Request):
+    enderecos = obter_enderecos_por_pagina(12, 0)
+    response = templates.TemplateResponse("enderecos.html", {"request": request, "enderecos": enderecos})
     return response
 
 if __name__ == "__main__":
