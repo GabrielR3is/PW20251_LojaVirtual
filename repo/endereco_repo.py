@@ -1,4 +1,5 @@
 from data.database import obter_conexao
+from models.cliente import Cliente
 from sql.endereco_sql import *
 from models.endereco import Endereco
 
