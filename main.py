@@ -13,7 +13,7 @@ from repo.categoria_repo import criar_tabela_categorias, obter_categorias_por_pa
 from repo.cliente_repo import criar_tabela_clientes, obter_clientes_por_pagina
 from repo.endereco_repo import criar_tabela_enderecos, obter_enderecos_por_pagina
 from repo.produto_repo import criar_tabela_produtos, obter_produto_por_id, obter_produtos_por_pagina
-from util.auth import autenticar_usuario
+from util.auth import SECRET_KEY, autenticar_usuario
 
 criar_tabela_produtos()
 criar_tabela_clientes()
@@ -22,6 +22,8 @@ criar_tabela_enderecos()
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
+app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
+criptografia = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def format_currency_br(value, currency='BRL', locale='pt_BR'):
     return format_currency(value, currency, locale=locale)
