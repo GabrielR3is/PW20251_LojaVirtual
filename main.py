@@ -56,6 +56,7 @@ def read_clientes(request: Request):
 
 @app.get("/categorias")
 def read_categoria(request: Request):
+    
     categorias = obter_categorias_por_pagina(12, 0)
     response = templates.TemplateResponse("categorias.html", {"request": request, "categorias": categorias})
     return response
